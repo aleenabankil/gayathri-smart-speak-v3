@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile - Gayathri Smart Speak</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #e0e0e0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        h1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 36px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(253, 203, 110, 0.4);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(253, 203, 110, 0.6);
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(214, 48, 49, 0.4);
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(214, 48, 49, 0.6);
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .profile-card {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            padding: 25px;
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .profile-card h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .profile-card .value {
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .level-card {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #2d3436;
+        }
+
+        .xp-card {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+        }
+
+        .stars-card {
+            background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+        }
+
+        .progress-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .progress-section h2 {
+            color: #2d3436;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .progress-bar-container {
+            background: #e0e0e0;
+            height: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #00b894, #00cec9, #ffd700);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 0.8s ease;
+        }
+
+        .activity-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .activity-section h2 {
+            color: #2d3436;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .activity-item .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .activity-item .name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+
+        .activity-item .stats {
+            font-size: 14px;
+            color: #636e72;
+        }
+
+        .activity-item .stars {
+            font-size: 24px;
+            color: #ffd700;
+            margin-top: 10px;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .info-item .icon {
+            font-size: 36px;
+        }
+
+        .info-item .details {
+            flex: 1;
+        }
+
+        .info-item .label {
+            font-size: 14px;
+            color: #636e72;
+            margin-bottom: 5px;
+        }
+
+        .info-item .value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3436;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .profile-grid, .activity-grid, .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                width: 100%;
+            }
+
+            .back-btn, .logout-btn {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👤 My Profile</h1>
+            <div class="button-group">
+                <button class="back-btn" onclick="window.location.href='/main'">
+                    ← Back to Learning
+                </button>
+                <button class="logout-btn" onclick="if(confirm('Are you sure you want to logout?')) window.location.href='/logout'">
+                    🚪 Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Profile Cards -->
+        <div class="profile-grid">
+            <div class="profile-card level-card">
+                <h3>Current Level</h3>
+                <div class="value">🏆 Level {{ user_data.level }}</div>
+            </div>
+            <div class="profile-card xp-card">
+                <h3>Total Experience</h3>
+                <div class="value">{{ user_data.total_xp }} XP</div>
+            </div>
+            <div class="profile-card stars-card">
+                <h3>Stars Collected</h3>
+                <div class="value">⭐ {{ user_data.total_stars }}</div>
+            </div>
+        </div>
+
+        <!-- Progress to Next Level -->
+        <div class="progress-section">
+            <h2>📈 Progress to Next Level</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: {{ (xp_in_current_level / xp_needed_for_next * 100) }}%">
+                    {{ xp_in_current_level }}/{{ xp_needed_for_next }} XP
+                </div>
+            </div>
+            <p style="text-align: center; color: #636e72; font-size: 16px;">
+                Keep earning stars to reach Level {{ user_data.level + 1 }}!
+            </p>
+        </div>
+
+        <!-- Activity Stats -->
+        <div class="activity-section">
+            <h2>🎮 Activity Statistics</h2>
+            <div class="activity-grid">
+                {% if user_data.mode_stats.repeat %}
+                <div class="activity-item">
+                    <div class="icon">🔁</div>
+                    <div class="name">Repeat Mode</div>
+                    <div class="stats">
+                        {{ user_data.mode_stats.repeat.sessions }} sessions completed
+                    </div>
+                    <div class="stars">{{ user_data.mode_stats.repeat.stars }} ⭐</div>
+                </div>
+                {% endif %}
+
+                {% if user_data.mode_stats.spellbee %}
+                <div class="activity-item">
+                    <div class="icon">🐝</div>
+                    <div class="name">Spell Bee</div>
+                    <div class="stats">
+                        {{ user_data.mode_stats.spellbee.sessions }} sessions completed
+                    </div>
+                    <div class="stars">{{ user_data.mode_stats.spellbee.stars }} ⭐</div>
+                </div>
+                {% endif %}
+
+                {% if not user_data.mode_stats.repeat and not user_data.mode_stats.spellbee %}
+                <div class="activity-item">
+                    <div class="icon">🎯</div>
+                    <div class="name">Get Started!</div>
+                    <div class="stats">
+                        Complete activities to see your stats here
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Personal Info -->
+        <div class="info-section">
+            <h2 style="color: #2d3436; margin-bottom: 20px; font-size: 24px;">📋 Personal Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="icon">👤</div>
+                    <div class="details">
+                        <div class="label">Full Name</div>
+                        <div class="value">{{ user_data.name }}</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="icon">🏫</div>
+                    <div class="details">
+                        <div class="label">Class</div>
+                        <div class="value">Class {{ user_data.class }}{{ user_data.division }}</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="icon">🆔</div>
+                    <div class="details">
+                        <div class="label">User ID</div>
+                        <div class="value">{{ user_id }}</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="icon">📅</div>
+                    <div class="details">
+                        <div class="label">Member Since</div>
+                        <div class="value">{{ user_data.created_at.split()[0] }}</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="icon">🕐</div>
+                    <div class="details">
+                        <div class="label">Last Active</div>
+                        <div class="value">{{ user_data.last_active.split()[0] }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
